@@ -3,24 +3,34 @@ package main
 import "fmt"
 
 type Order struct {
-	ID         string
-	price      float64
-	quantidade int
+	ID       string
+	Price    float64
+	Quantity int
 }
 
-func (o Order) getTotal() float64 {
-	return o.price * float64(o.quantidade)
+func (o Order) GetTotal() float64 {
+	return o.Price * float64(o.Quantity)
+}
+
+func (o *Order) SetPrice(price float64) { // asterisco é ponteiro, deixando a função habilitada para setar valor da origem
+	o.Price = price
+	fmt.Println("Price dentro do SetPrice", o.Price)
 }
 
 func main() {
 	order := Order{
-		ID:         "123",
-		price:      10.5,
-		quantidade: 8,
+		ID:       "123",
+		Price:    10,
+		Quantity: 8,
 	}
 
-	fmt.Println(order.ID, order.price, order.quantidade)
-	fmt.Println(order.getTotal())
+	//TESTES COM FUNÇÃO E PRINTS
+	fmt.Println(order.ID, order.Price, order.Quantity)
+	fmt.Println(order.GetTotal())
+
+	//Testes com setPrice
+	order.SetPrice(20)
+	fmt.Println("Preço Total", order.GetTotal())
 
 	a := 10
 	b := 20
